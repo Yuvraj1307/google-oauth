@@ -166,12 +166,12 @@ passport2.use(
 
 
 
-fbrouter.get(
+app.get(
   "/auth/facebook",
   passport2.authenticate("facebook", { scope: ["email"] })
 );
 
-fbrouter.get(
+app.get(
   "/auth/facebook/callback",
   passport2.authenticate("facebook", {
     failureRedirect: "/facebook/login",
