@@ -130,7 +130,7 @@ const passport2 = require("passport");
  
  
  
-const { JsonWebTokenError } = require("jsonwebtoken");
+ 
  
 passport2.use(
   new FacebookStrategy(
