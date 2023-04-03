@@ -75,7 +75,7 @@ passport3.use(
     {
       clientID: "568155812b74c0d612c7",
       clientSecret: "6b60f85eb0c563b4227ff0697a4ac01876bf04d8",
-      callbackURL: "https://zany-gray-clownfish-shoe.cyclic.app/auth/google/callback",
+      callbackURL: "https://zany-gray-clownfish-shoe.cyclic.app/auth/github/callback",
       scope: "user:email",
     },
     async function (accessToken, refreshToken, profile, done) {
