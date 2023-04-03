@@ -87,7 +87,7 @@ app.get(
     function (req, res) {
       let user = req.user;
  // res.send("dfsdfds")
-      res.redirect(`http://127.0.0.1:5502/frontend/masseges.html?id=${user._id}`);
+      res.redirect(`https://startling-alfajores-aa4df1.netlify.app/frontend/masseges.html?id=${user._id}`);
     }
   );
 app.listen(4500,async ()=>{
