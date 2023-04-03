@@ -36,7 +36,7 @@ passport.use(
     {
       clientID: "963616789235-ti40kvov008ok0e482jc6jutb1etjsvr.apps.googleusercontent.com",
       clientSecret: "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",
-      callbackURL: "http://localhost:4500/auth/google/callback",
+      callbackURL: "https://zany-gray-clownfish-shoe.cyclic.app/auth/google/callback",
     },
     async function (accessToken, refreshToken, profile, cb) {
       await redisclient.SET("tokens", JSON.stringify({"token":accessToken}));
