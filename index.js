@@ -9,26 +9,6 @@ app.get("/",(req,res)=>{
 res.send(req.url)
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const passport = require("passport");
-// require("dotenv").config();
-
  
 const { v4: uuidv4 } = require("uuid");
 passport.use(
@@ -61,18 +41,6 @@ passport.use(
 );
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 app.get(
     "/auth/google",
     passport.authenticate("google", { scope: ["profile", "email"] })
@@ -90,6 +58,72 @@ app.get(
       res.redirect(`https://startling-alfajores-aa4df1.netlify.app/masseges.html?id=${user._id}`);
     }
   );
+
+
+
+
+
+
+const passport3 = require("passport");
+
+var GitHubStrategy = require("passport-github2").Strategy;
+ 
+ 
+
+passport3.use(
+  new GitHubStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: "https://zany-gray-clownfish-shoe.cyclic.app/auth/google/callback",
+      scope: "user:email",
+    },
+    async function (accessToken, refreshToken, profile, done) {
+      
+      let email = profile.emails[0].value;
+      await redisclient.SET(email, JSON.stringify({ "token": accessToken }));
+      await redisclient.SET("email",`${email}`);
+      let udata = await UserModel.findOne({ email });
+      // console.log(accessToken)
+      if (udata) {
+        return done(null, udata);
+      }
+      let name = profile._json.name;
+      let N = name.trim().split(" ");
+      let logo = N[0][0] + N[N.length - 1][0];
+      const user = new UserModel({
+        name,
+        logo,
+        email,
+        password: uuidv4(),
+      });
+      await user.save();
+      return done(null, user);
+      console.log(profile);
+    }
+  )
+);
+
+app.get(
+  "/auth/github",
+  passport3.authenticate("github", { scope: ["user:email"] })
+);
+
+app.get(
+  "/auth/github/callback",
+  passport3.authenticate("github", {
+    failureRedirect: "/login",
+    session: false,
+  }),
+  function (req, res) {
+    let user = req.user;
+    res.redirect(`https://startling-alfajores-aa4df1.netlify.app/masseges.html?id=${user._id}`);
+
+  }
+);
+
+
+
 app.listen(4500,async ()=>{
     try{
         await connection
