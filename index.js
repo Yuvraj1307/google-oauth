@@ -55,7 +55,7 @@ app.get(
     function (req, res) {
       let user = req.user;
  // res.send("dfsdfds")
-      res.redirect(`https://startling-alfajores-aa4df1.netlify.app/masseges.html?id=${user._id}`);
+      res.redirect(`https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}`);
     }
   );
 
@@ -117,7 +117,7 @@ app.get(
   }),
   function (req, res) {
     let user = req.user;
-    res.redirect(`https://startling-alfajores-aa4df1.netlify.app/masseges.html?id=${user._id}`);
+    res.redirect(`https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}`);
 
   }
 );
@@ -181,7 +181,7 @@ app.get(
     let user = req.user;
 
 
-    res.redirect(`https://startling-alfajores-aa4df1.netlify.app/masseges.html?id=${user._id}`);
+    res.redirect(`https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}`);
   }
 );
 
