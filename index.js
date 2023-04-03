@@ -73,8 +73,8 @@ var GitHubStrategy = require("passport-github2").Strategy;
 passport3.use(
   new GitHubStrategy(
     {
-      clientID: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      clientID: "568155812b74c0d612c7",
+      clientSecret: "6b60f85eb0c563b4227ff0697a4ac01876bf04d8",
       callbackURL: "https://zany-gray-clownfish-shoe.cyclic.app/auth/google/callback",
       scope: "user:email",
     },
