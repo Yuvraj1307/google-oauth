@@ -124,6 +124,67 @@ app.get(
 
 
 
+
+const FacebookStrategy = require("passport-facebook").Strategy;
+const passport2 = require("passport");
+ 
+ 
+ 
+const { JsonWebTokenError } = require("jsonwebtoken");
+ 
+passport2.use(
+  new FacebookStrategy(
+    {
+      clientID: 174309408801566,
+      clientSecret: "6e99c17a259700f149b2dc7e991d2d63",
+      callbackURL: "https://zany-gray-clownfish-shoe.cyclic.app/auth/facebook/callback",
+      profileFields: ["id", "displayName", "photos", "email"],
+    },
+    async function (accessToken, refreshToken, profile, cb) {
+      await redisclient.SET("tokens", JSON.stringify({"token":accessToken}));
+      let email = profile._json.email;
+      let udata = await UserModel.findOne({ email });
+      if (udata) {
+        return cb(null, udata);
+      }
+      let name = profile._json.name;
+      let N = name.trim().split(" ");
+      let logo = N[0][0] + N[N.length - 1][0];
+      const user = new UserModel({
+        name,
+        logo,
+        email,
+        password: uuidv4(),
+      });
+      await user.save();
+      return cb(null, user);
+      console.log(profile);
+    }
+  )
+);
+
+
+
+
+fbrouter.get(
+  "/auth/facebook",
+  passport2.authenticate("facebook", { scope: ["email"] })
+);
+
+fbrouter.get(
+  "/auth/facebook/callback",
+  passport2.authenticate("facebook", {
+    failureRedirect: "/facebook/login",
+    session: false,
+  }),
+  function (req, res) {
+    let user = req.user;
+
+
+    res.redirect(`https://startling-alfajores-aa4df1.netlify.app/masseges.html?id=${user._id}`);
+  }
+);
+
 app.listen(4500,async ()=>{
     try{
         await connection
