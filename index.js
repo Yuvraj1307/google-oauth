@@ -135,8 +135,8 @@ const passport2 = require("passport");
 passport2.use(
   new FacebookStrategy(
     {
-      clientID: "174309408801566",
-      clientSecret: "6e99c17a259700f149b2dc7e991d2d63",
+      clientID: "974353840184078",
+      clientSecret: "9e4fe346bfc7949f18310d215ea26b64",
       callbackURL: "https://zany-gray-clownfish-shoe.cyclic.app/auth/facebook/callback",
       profileFields: ["id", "displayName", "photos", "email"],
     },
