@@ -55,7 +55,7 @@ app.get(
     function (req, res) {
       let user = req.user;
  // res.send("dfsdfds")
-      res.redirect(`https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}`);
+      res.redirect(`https://64802391adddc43187b1cf49--lambent-trifle-ac5b1d.netlify.app/masseges.html?id=${user._id}`);
     }
   );
 
@@ -117,7 +117,7 @@ app.get(
   }),
   function (req, res) {
     let user = req.user;
-    res.redirect(`https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}`);
+    res.redirect(`https://64802391adddc43187b1cf49--lambent-trifle-ac5b1d.netlify.app/masseges.html?id=${user._id}`);
 
   }
 );
@@ -181,7 +181,7 @@ app.get(
     let user = req.user;
 
 
-    res.redirect(`https://transcendent-horse-5d8cb8.netlify.app/masseges.html?id=${user._id}`);
+    res.redirect(`https://64802391adddc43187b1cf49--lambent-trifle-ac5b1d.netlify.app/masseges.html?id=${user._id}`);
   }
 );
 
